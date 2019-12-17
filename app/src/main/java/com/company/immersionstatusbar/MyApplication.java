@@ -2,8 +2,12 @@ package com.company.immersionstatusbar;
 
 import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Context;
 import android.os.Process;
 import android.util.Log;
+
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * ┏┓　   ┏┓
@@ -24,10 +28,12 @@ import android.util.Log;
  * Created by clz on 2019/11/29
  */
 public class MyApplication extends Application {
+    private RefWatcher refWatcher;
     @Override
     public void onCreate() {
         super.onCreate();
         initEvent();
+        refWatcher= setupLeakCanary();
     }
 
     private void initEvent() {
@@ -46,5 +52,17 @@ public class MyApplication extends Application {
         } else {
             Log.i("clz", "processName=" + progressName + "-----work");
         }
+    }
+
+    private RefWatcher setupLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return RefWatcher.DISABLED;
+        }
+        return LeakCanary.install(this);
+    }
+
+    public static RefWatcher getRefWatcher(Context context) {
+        MyApplication leakApplication = (MyApplication) context.getApplicationContext();
+        return leakApplication.refWatcher;
     }
 }

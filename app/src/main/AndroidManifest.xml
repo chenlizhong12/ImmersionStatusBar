@@ -2,6 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.company.immersionstatusbar">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -10,7 +21,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateTwoProgressActivity"></activity>
+        <activity android:name=".LifecycleActivity"></activity>
+        <activity android:name=".BlueToothActivity" />
+        <activity android:name=".LeakCanaryActivity" />
+        <activity android:name=".MessengerToServiceActivity" />
+        <activity android:name=".CreateTwoProgressActivity" />
 
         <service
             android:name=".MyService"
@@ -22,7 +37,7 @@
         <activity android:name=".CardViewActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".BangScreenActivity" />
-        <activity android:name=".MessengerToServiceActivity">
+        <activity android:name=".RedMessagePoPActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

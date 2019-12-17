@@ -1,5 +1,6 @@
 package com.company.immersionstatusbar;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.DisplayCutout;
@@ -21,6 +22,13 @@ public class BangScreenActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_bang_screen);
+        findViewById(R.id.topButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BangScreenActivity.this, LeakCanaryActivity.class);
+                startActivity(intent);
+            }
+        });
         View decodeView = getWindow().getDecorView();
         int options = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decodeView.setSystemUiVisibility(options);
